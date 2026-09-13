@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Freed — Ethical Participative Finance</title>
+<meta name="description" content="Freed connects savers and entrepreneurs through an equitable profit and risk sharing contract. No interest. No artificial guarantee."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#1a4a2e;--gm:#245c3a;--gl:#eef5f0;--gp:#f5faf7;
+  --gold:#b8973a;--gold-l:#faf5e8;
+  --dark:#111827;--gray:#6b7280;--light:#f9fafb;--border:#e5e7eb;
+  --font:'Inter',system-ui,sans-serif;
+  --serif:'DM Serif Display',Georgia,serif;
+  --r:12px;--sh:0 2px 20px rgba(26,74,46,.08);
+}
+body{font-family:var(--font);color:var(--dark);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--g);text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--g);height:60px;display:flex;align-items:center;padding:0 32px;gap:12px}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-family:var(--serif);font-size:20px;font-weight:400;letter-spacing:.5px}
+.nav-logo span{font-size:10px;color:rgba(255,255,255,.45);font-family:var(--font);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-left:6px}
+.nav-links{margin-left:auto;display:flex;gap:6px}
+.nav-links a{color:rgba(255,255,255,.75);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:.15s}
+.nav-links a:hover{background:rgba(255,255,255,.1);color:#fff}
+
+.hero{min-height:100vh;background:linear-gradient(160deg,#081a0f 0%,var(--g) 55%,#2d6b40 100%);display:flex;align-items:center;padding:100px 32px 60px}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:center}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-right{display:none}}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:6px 16px;font-size:12px;color:rgba(255,255,255,.8);font-weight:500;margin-bottom:24px;letter-spacing:.3px}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%}
+h1{font-family:var(--serif);font-size:clamp(36px,5vw,58px);color:#fff;line-height:1.1;margin-bottom:20px}
+h1 em{color:#7de8a8;font-style:italic}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:36px;max-width:520px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:8px;font-size:15px;font-weight:600;transition:.15s}
+.btn-white{background:#fff;color:var(--g)}.btn-white:hover{background:var(--gl)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)}.btn-ghost:hover{background:rgba(255,255,255,.15)}
+.hero-trust{margin-top:28px;display:flex;gap:20px;flex-wrap:wrap}
+.hero-trust span{font-size:12px;color:rgba(255,255,255,.4)}
+.hero-right{display:flex;flex-direction:column;gap:14px}
+.float-card{background:rgba(255,255,255,.07);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px}
+.float-card-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:4px}
+.float-card-sub{font-size:11px;color:rgba(255,255,255,.45);margin-bottom:12px}
+.pb{height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-bottom:5px}
+.pf{height:100%;background:var(--gold);border-radius:99px}
+.fr{display:flex;justify-content:space-between;font-size:11px}
+.fr span:first-child{color:var(--gold);font-weight:600}
+.fr span:last-child{color:rgba(255,255,255,.35)}
+
+.stats{background:var(--g);padding:28px 32px}
+.stats-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px}
+.stat{text-align:center}
+.stat-n{font-family:var(--serif);font-size:30px;color:#fff}
+.stat-l{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+
+section{padding:80px 32px}
+.si{max-width:1100px;margin:0 auto}
+.sl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.st{font-family:var(--serif);font-size:clamp(26px,4vw,40px);color:var(--dark);line-height:1.2;margin-bottom:14px}
+.ss{font-size:16px;color:var(--gray);line-height:1.8;max-width:580px}
+
+/* STORY */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:48px}
+@media(max-width:800px){.story-grid{grid-template-columns:1fr}}
+.story-quote{font-family:var(--serif);font-size:22px;color:var(--g);line-height:1.5;border-left:3px solid var(--gold);padding-left:20px;margin-bottom:24px;font-style:italic}
+.story-body{font-size:15px;color:var(--gray);line-height:1.85;margin-bottom:16px}
+.system-cards{display:flex;flex-direction:column;gap:14px}
+.sys-card{background:var(--light);border:1px solid var(--border);border-radius:12px;padding:20px}
+.sys-card-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.sys-card-title{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.sys-card-desc{font-size:13px;color:var(--gray);line-height:1.65}
+.sys-card-tag{display:inline-block;background:var(--gl);color:var(--g);font-size:10px;font-weight:600;padding:3px 10px;border-radius:99px;margin-top:10px}
+
+/* HOW */
+.how-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:48px}
+@media(max-width:800px){.how-steps{grid-template-columns:1fr;gap:12px}}
+.how-step{text-align:center;padding:24px 14px;position:relative}
+.how-step::after{content:'→';position:absolute;right:-8px;top:28px;font-size:18px;color:var(--border)}
+.how-step:last-child::after{display:none}
+@media(max-width:800px){.how-step::after{display:none}}
+.how-num{width:44px;height:44px;border-radius:50%;background:var(--g);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.how-title{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:5px}
+.how-desc{font-size:11.5px;color:var(--gray);line-height:1.6}
+
+/* GLOSSARY */
+.glossary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+@media(max-width:800px){.glossary-grid{grid-template-columns:1fr}}
+.g-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;box-shadow:var(--sh)}
+.g-card-icon{font-size:22px;margin-bottom:10px}
+.g-card-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.g-card-type{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.g-card-desc{font-size:12.5px;color:var(--gray);line-height:1.65}
+.g-card-detail{margin-top:10px;padding:8px 12px;background:var(--gl);border-radius:6px;font-size:11.5px;color:var(--g);line-height:1.55}
+
+/* EXAMPLE */
+.example-box{background:var(--dark);border-radius:16px;padding:36px;margin-top:48px}
+.example-title{font-family:var(--serif);font-size:22px;color:#fff;margin-bottom:6px}
+.example-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:28px}
+.eg{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.eg{grid-template-columns:1fr}}
+.eg-col h4{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.eg-item{display:flex;gap:10px;margin-bottom:11px;font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.55}
+.eg-item::before{content:'→';color:var(--gold);flex-shrink:0;font-weight:700;margin-top:1px}
+.eg-table{background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden;margin-top:4px}
+.eg-row{display:flex;justify-content:space-between;padding:9px 14px;font-size:12.5px;border-bottom:1px solid rgba(255,255,255,.05)}
+.eg-row:last-child{border:none;font-weight:700;color:#fff;background:rgba(255,255,255,.06);padding:12px 14px}
+.eg-row span:first-child{color:rgba(255,255,255,.5)}
+.eg-row span:last-child{color:#7de8a8}
+
+/* COMPARE */
+.compare-table{width:100%;border-collapse:collapse;margin-top:40px;border-radius:12px;overflow:hidden}
+.compare-table th{background:var(--g);color:#fff;font-size:12px;font-weight:600;padding:14px 16px;text-align:left}
+.compare-table td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--border)}
+.compare-table tr:nth-child(even) td{background:var(--light)}
+.compare-table td:first-child{font-weight:500;color:var(--dark)}
+.chk{color:#16a34a;font-weight:700}
+.crs{color:#dc2626;font-weight:500}
+
+/* SPV SCHEMA */
+.spv-wrap{margin-top:48px}
+.spv-top{background:var(--g);border-radius:12px 12px 0 0;padding:18px 24px;text-align:center;color:#fff;font-weight:600;font-size:14px;line-height:1.5}
+.spv-arrows{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;color:var(--g);font-size:18px;padding:4px 0}
+.spv-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.spv-box{background:var(--gl);padding:16px;text-align:center}
+.spv-box-title{font-size:12px;font-weight:700;color:var(--g);margin-bottom:4px}
+.spv-box-sub{font-size:11px;color:var(--gray);line-height:1.5}
+.spv-inv-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.spv-inv{background:var(--light);padding:12px;text-align:center;font-size:11px;color:var(--gray);line-height:1.5;border-radius:0 0 0 0}
+.spv-inv:first-child{border-radius:0 0 0 12px}
+.spv-inv:last-child{border-radius:0 0 12px 0}
+.three-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.box{padding:20px;background:var(--gl);border-radius:10px;border-left:3px solid var(--g)}
+.box-title{font-size:13px;font-weight:700;color:var(--g);margin-bottom:6px}
+.box-desc{font-size:12px;color:var(--gray);line-height:1.65}
+
+/* TECH */
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+@media(max-width:800px){.tech-grid{grid-template-columns:1fr}}
+.tech-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;box-shadow:var(--sh)}
+.tech-badge{display:inline-block;background:var(--gl);color:var(--g);font-size:10px;font-weight:600;padding:3px 9px;border-radius:99px;margin-bottom:8px;letter-spacing:.3px}
+.tech-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.tech-desc{font-size:12.5px;color:var(--gray);line-height:1.65}
+.tech-detail{margin-top:10px;padding:8px 12px;background:var(--gp);border-radius:6px;font-size:11.5px;color:var(--g);line-height:1.55}
+
+/* REVENUE */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+@media(max-width:700px){.rev-grid{grid-template-columns:1fr}}
+.rev-card{background:var(--light);border:1px solid var(--border);border-radius:12px;padding:24px}
+.rev-num{font-family:var(--serif);font-size:34px;color:var(--g);margin-bottom:6px}
+.rev-title{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:8px}
+.rev-desc{font-size:12px;color:var(--gray);line-height:1.65}
+
+/* FOOTER */
+.closing{background:linear-gradient(135deg,#081a0f,var(--g));padding:80px 32px;text-align:center}
+.closing h2{font-family:var(--serif);font-size:clamp(28px,4vw,44px);color:#fff;margin-bottom:16px}
+.closing p{font-size:16px;color:rgba(255,255,255,.65);line-height:1.8;max-width:620px;margin:0 auto 36px}
+footer{background:#0a1f0f;padding:32px}
+.fi{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:var(--serif);font-size:18px;color:#fff}
+.footer-by{font-size:11px;color:rgba(255,255,255,.35);margin-top:3px}
+.footer-right{font-size:12px;color:rgba(255,255,255,.35);text-align:right;line-height:1.7}
+
+.gold-note{margin-top:32px;padding:20px 24px;background:var(--gold-l);border-left:3px solid var(--gold);border-radius:8px;font-size:14px;color:#5a3d00;line-height:1.75}
+.divider{height:1px;background:var(--border);margin:48px 0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+      <rect width="60" height="60" rx="10" fill="#1a4a2e"/>
+      <path d="M15 45 Q30 10 45 45" fill="white" opacity="0.9"/>
+      <rect x="26" y="27" width="8" height="8" rx="2" fill="#b8973a" transform="rotate(45 30 31)"/>
+    </svg>
+    Freed <span>a concept by Baybars Ali Adi</span>
+  </div>
+  <div class="nav-links">
+    <a href="#story">The story</a>
+    <a href="#how">How it works</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#tech">Technology</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Participative finance · Zero fixed interest</div>
+      <h1>Finance the<br/>neighborhood.<br/><em>Together.</em></h1>
+      <p class="hero-sub">Freed connects savers and entrepreneurs through an equitable profit and risk sharing contract — no bank intermediary, no fixed interest, no artificial guarantee. A real partnership.</p>
+      <div class="hero-ctas">
+        <a href="#how" class="btn btn-white">Discover the concept →</a>
+        <a href="https://github.com" class="btn btn-ghost" target="_blank">View source on GitHub</a>
+      </div>
+      <div class="hero-trust">
+        <span>⚖ Based on French contract law · Art. 1871-1873</span>
+        <span>🔒 One SPV per project · Dedicated IBAN</span>
+        <span>📍 Designed in France</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="float-card">
+        <div class="float-card-title">🥩 Karim's Butcher Shop · Lyon</div>
+        <div class="float-card-sub">Active collection · 24 months · 20% profits shared</div>
+        <div class="pb"><div class="pf" style="width:73%"></div></div>
+        <div class="fr"><span>73% funded</span><span>10,950 / 15,000€</span></div>
+      </div>
+      <div class="float-card">
+        <div class="float-card-title">🚗 Thomas VTC · Paris</div>
+        <div class="float-card-sub">Active collection · 36 months · 25% profits shared</div>
+        <div class="pb"><div class="pf" style="width:41%"></div></div>
+        <div class="fr"><span>41% funded</span><span>8,200 / 20,000€</span></div>
+      </div>
+      <div class="float-card">
+        <div class="float-card-title">📚 Nadia's School · Marseille</div>
+        <div class="float-card-sub">Active collection · 36 months · 20% profits shared</div>
+        <div class="pb"><div class="pf" style="width:90%"></div></div>
+        <div class="fr"><span>90% funded</span><span>31,500 / 35,000€</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-n">$5T+</div><div class="stat-l">Global ethical finance market</div></div>
+    <div class="stat"><div class="stat-n">50€</div><div class="stat-l">Minimum investment</div></div>
+    <div class="stat"><div class="stat-n">0%</div><div class="stat-l">Fixed guaranteed interest</div></div>
+    <div class="stat"><div class="stat-n">SPV</div><div class="stat-l">Dedicated per project</div></div>
+  </div>
+</div>
+
+<!-- THE STORY -->
+<section id="story">
+  <div class="si">
+    <div class="sl">The origin</div>
+    <h2 class="st">Born from three years of studying two financial worlds</h2>
+    <div class="story-grid">
+      <div>
+        <div class="story-quote">"What if the most robust financial principles from one system could be applied anywhere, by anyone?"</div>
+        <p class="story-body">For over three years, I've been fascinated by how different financial systems approach the same fundamental question: how do you make money work ethically, fairly, and productively?</p>
+        <p class="story-body">Islamic finance and conventional finance answer this question in radically different ways. One forbids fixed interest and demands real risk-sharing. The other is built entirely on it. Both have strengths. Both have blind spots.</p>
+        <p class="story-body">Freed is what happens when you take the most compelling mechanism from Islamic finance — the Moucharaka Moutanaqissa — and adapt it into a participative finance model that works within French law, for anyone, regardless of background.</p>
+        <p class="story-body">No interest. No artificial guarantee. A genuine partnership between those who have capital and those who have projects.</p>
+      </div>
+      <div class="system-cards">
+        <div class="sys-card">
+          <div class="sys-card-label">System 1</div>
+          <div class="sys-card-title">Conventional Finance</div>
+          <div class="sys-card-desc">Built on interest — the lender is always protected regardless of the borrower's outcome. Capital grows whether the project succeeds or fails. The risk is asymmetric by design.</div>
+          <div class="sys-card-tag">Interest-based · Fixed return · Bank as intermediary</div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-label">System 2</div>
+          <div class="sys-card-title">Islamic Finance</div>
+          <div class="sys-card-desc">Built on real economic activity. Money must be tied to a tangible project. Profit is legitimate — but only when risk is genuinely shared between all parties. The Moucharaka Moutanaqissa is its most elegant instrument.</div>
+          <div class="sys-card-tag">Risk-sharing · Profit-based · No fixed interest</div>
+        </div>
+        <div class="sys-card" style="border-color:var(--g);border-width:2px">
+          <div class="sys-card-label">Freed</div>
+          <div class="sys-card-title">The synthesis</div>
+          <div class="sys-card-desc">Inspired by the teachings of the Moucharaka Moutanaqissa, adapted into a French participative finance framework. No religious label. No jargon. Just the mechanism — equity, transparency, shared stakes.</div>
+          <div class="sys-card-tag" style="background:var(--g);color:#fff">Open to everyone · Ethical · French law</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--gp)">
+  <div class="si">
+    <div class="sl">The mechanism</div>
+    <h2 class="st">A degressive sharing contract — step by step</h2>
+    <p class="ss">The entrepreneur gradually buys back the investors' shares over the contract period. At the end, they are the sole owner. No debt. No interest. A real partnership with a clear exit.</p>
+    <div class="how-steps">
+      <div class="how-step"><div class="how-num">①</div><div class="how-title">Submission</div><div class="how-desc">The entrepreneur submits their project — amount needed, duration, profit-sharing rate.</div></div>
+      <div class="how-step"><div class="how-num">②</div><div class="how-title">Validation</div><div class="how-desc">Freed reviews the application. Rigorous due diligence before any publication.</div></div>
+      <div class="how-step"><div class="how-num">③</div><div class="how-title">SPV created</div><div class="how-desc">A dedicated company (SPV) is created with its own bank account and IBAN.</div></div>
+      <div class="how-step"><div class="how-num">④</div><div class="how-title">Collection</div><div class="how-desc">The community invests from 50€. Each investor becomes a co-shareholder.</div></div>
+      <div class="how-step"><div class="how-num">⑤</div><div class="how-title">Sharing</div><div class="how-desc">Monthly profit distributions. Progressive buyback of shares. Full ownership at maturity.</div></div>
+    </div>
+    <div class="gold-note"><strong>All-or-nothing model:</strong> if the funding target is not reached within the deadline, every investor is fully refunded. Freed receives nothing. Risk is shared at every level.</div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary">
+  <div class="si">
+    <div class="sl">Key concepts</div>
+    <h2 class="st">Every term, clearly explained</h2>
+    <p class="ss">From the founding principle to the technical infrastructure — what each concept means and why it matters.</p>
+    <div class="glossary-grid">
+      <div class="g-card">
+        <div class="g-card-icon">⚖</div>
+        <div class="g-card-type">Founding Principle</div>
+        <div class="g-card-title">Moucharaka Moutanaqissa</div>
+        <div class="g-card-desc">A centuries-old Islamic financial contract meaning "degressive partnership." The investor gradually transfers ownership to the entrepreneur over the contract period, as profits are shared monthly.</div>
+        <div class="g-card-detail">Freed adapts its core logic — shared risk, shared profit, progressive buyback — into French participative finance law.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-card-icon">🏛</div>
+        <div class="g-card-type">Legal Structure</div>
+        <div class="g-card-title">SPV — Special Purpose Vehicle</div>
+        <div class="g-card-desc">A dedicated company created exclusively for one project. It has its own legal identity, its own bank account, its own shareholders. If this project fails, no other project or Freed SAS is affected.</div>
+        <div class="g-card-detail">Think of it as a separate drawer for each project — if one drawer catches fire, the others remain intact.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-card-icon">📋</div>
+        <div class="g-card-type">Contract Type</div>
+        <div class="g-card-title">Société en participation</div>
+        <div class="g-card-desc">The French legal form used by Freed (Art. 1871–1873 of the French Civil Code). A partnership without legal registration, allowing multiple people to associate around a project and share profits and losses.</div>
+        <div class="g-card-detail">This is the legal backbone that makes the degressive sharing contract valid and enforceable in France.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-card-icon">🏦</div>
+        <div class="g-card-type">Payment Infrastructure</div>
+        <div class="g-card-title">Swan — IBAN per SPV</div>
+        <div class="g-card-desc">Swan is a French Banking-as-a-Service provider licensed by the Banque de France. It allows Freed to open a real French IBAN (FR76...) for each SPV — so investors wire directly to the project's account.</div>
+        <div class="g-card-detail">Money never mixes between projects. Total transparency. This is the technological backbone of Freed's architecture.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-card-icon">🔑</div>
+        <div class="g-card-type">Regulatory Status</div>
+        <div class="g-card-title">IFP — ORIAS registration</div>
+        <div class="g-card-desc">Intermédiaire en Financement Participatif. A mandatory registration with the French financial regulator ORIAS to legally operate a participative finance platform. Not a banking license — an intermediary status.</div>
+        <div class="g-card-detail">This is what allows Freed to legally match investors and entrepreneurs without holding funds itself.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-card-icon">✍</div>
+        <div class="g-card-type">Digital Signing</div>
+        <div class="g-card-title">Yousign — eIDAS certified</div>
+        <div class="g-card-desc">Every degressive sharing contract between Freed, the entrepreneur, and each investor is digitally signed before any funds are released. Yousign is a French solution certified under the EU eIDAS regulation.</div>
+        <div class="g-card-detail">Each party receives a legally binding signed copy before any money moves.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLE -->
+<section style="background:var(--gp)">
+  <div class="si">
+    <div class="sl">Case study</div>
+    <h2 class="st">Thomas, his VTC license, and 200 strangers who believed in him</h2>
+    <p class="ss">Thomas has been a ride-hailing driver for 3 years. He rents his car for 350€/week — 18,200€/year gone. With his own vehicle, he doubles his net margin. He needs 20,000€.</p>
+    <div class="example-box">
+      <div class="example-title">The full scenario</div>
+      <div class="example-sub">From the first euro collected to full ownership — every step</div>
+      <div class="eg">
+        <div>
+          <h4>The collection</h4>
+          <div class="eg-item">Thomas submits 21,000€ on Freed (20,000€ net + 5% platform fee)</div>
+          <div class="eg-item">150 investors put in an average of 140€ each</div>
+          <div class="eg-item">Sophie, a nurse, invests 600€ → she holds 3% of the SPV</div>
+          <div class="eg-item">Contract: 36 months · 25% of net monthly profits shared</div>
+          <div class="eg-item">A dedicated IBAN (FR76 002...) is opened for this SPV only</div>
+          <div class="eg-item">All-or-nothing: if 21,000€ isn't raised, everyone is refunded</div>
+        </div>
+        <div>
+          <h4>Sophie's returns — month by month</h4>
+          <div class="eg-table">
+            <div class="eg-row"><span>Month 6 · net profit 2,200€</span><span>Sophie receives 16.50€</span></div>
+            <div class="eg-row"><span>Month 12 · net profit 2,500€</span><span>Sophie receives 18.75€</span></div>
+            <div class="eg-row"><span>Month 24 · net profit 2,800€</span><span>Sophie receives 21.00€</span></div>
+            <div class="eg-row"><span>Month 36 · final settlement</span><span>Sophie receives 21.00€</span></div>
+            <div class="eg-row"><span>Sophie's total</span><span>1,230€ for 600€ invested (+105%)</span></div>
+          </div>
+          <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.4);line-height:1.6">Thomas saves 18,200€/year in rental fees. Over 3 years: 54,600€ saved. He owns his vehicle outright. No interest ever paid.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3 style="font-family:var(--serif);font-size:20px;color:var(--dark);margin-bottom:16px">What if Thomas has a bad month?</h3>
+    <p style="font-size:15px;color:var(--gray);line-height:1.8;max-width:700px">This is where Freed is honest. If Thomas generates zero net profit in a given month, Sophie receives nothing that month — no profit distribution, no share buyback. The risk is genuinely shared. No one is protected at someone else's expense. That is a real partnership, not a disguised financial product.</p>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section>
+  <div class="si">
+    <div class="sl">Market positioning</div>
+    <h2 class="st">Freed doesn't compete with Wiseed or Lita</h2>
+    <p class="ss">Those platforms fund tech startups raising 200k+. Freed funds the neighborhood butcher, the ride-hailing driver, the local school. Different product. Different client. Different mission.</p>
+    <table class="compare-table">
+      <thead><tr><th></th><th>Traditional bank</th><th>Wiseed / Lita</th><th>Freed</th></tr></thead>
+      <tbody>
+        <tr><td>Minimum ticket</td><td>Variable</td><td>100€ (projects >200k)</td><td class="chk">50€</td></tr>
+        <tr><td>Project type</td><td>Everything</td><td>Tech startups, green energy</td><td class="chk">Local businesses, TPE</td></tr>
+        <tr><td>Mechanism</td><td class="crs">Fixed guaranteed interest</td><td>Loan or equity stake</td><td class="chk">Profit + risk sharing</td></tr>
+        <tr><td>Transparency</td><td class="crs">Hidden fees in the rate</td><td>Moderate</td><td class="chk">Dedicated SPV, own IBAN</td></tr>
+        <tr><td>Artificial guarantee</td><td class="crs">Always</td><td>Partial</td><td class="chk">None — genuine shared risk</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SPV STRUCTURE -->
+<section style="background:var(--gp)">
+  <div class="si">
+    <div class="sl">Legal architecture</div>
+    <h2 class="st">Freed SAS · The SPVs · The projects</h2>
+    <p class="ss">Three fully independent entities. If one project fails, Freed SAS and all other SPVs remain untouched. Total risk isolation by design.</p>
+    <div class="spv-wrap">
+      <div class="spv-top">FREED SAS — Intermediation platform · IFP status · ORIAS · 5% collection fee + 1%/month on distributions</div>
+      <div class="spv-arrows"><span>↓</span><span>↓</span><span>↓</span></div>
+      <div class="spv-row">
+        <div class="spv-box"><div class="spv-box-title">SPV 001 — Karim's Butcher</div><div class="spv-box-sub">15,000€ · 24 months · 20% profits<br/>IBAN FR76 001...</div></div>
+        <div class="spv-box"><div class="spv-box-title">SPV 002 — Thomas VTC</div><div class="spv-box-sub">20,000€ · 36 months · 25% profits<br/>IBAN FR76 002...</div></div>
+        <div class="spv-box"><div class="spv-box-title">SPV 003 — Nadia's School</div><div class="spv-box-sub">35,000€ · 36 months · 20% profits<br/>IBAN FR76 003...</div></div>
+      </div>
+      <div class="spv-arrows"><span>↓</span><span>↓</span><span>↓</span></div>
+      <div class="spv-inv-row">
+        <div class="spv-inv">Co-shareholders · Min 5 per SPV<br/>Max 33% per person · Monthly reporting</div>
+        <div class="spv-inv">Co-shareholders · Min 5 per SPV<br/>Max 33% per person · Monthly reporting</div>
+        <div class="spv-inv">Co-shareholders · Min 5 per SPV<br/>Max 33% per person · Monthly reporting</div>
+      </div>
+    </div>
+    <div class="three-boxes">
+      <div class="box"><div class="box-title">Freed SAS</div><div class="box-desc">Creates SPVs, manages fund flows, collects commissions. <strong>Holds zero shares</strong> in any SPV. Does not own any project.</div></div>
+      <div class="box"><div class="box-title">The SPV</div><div class="box-desc">An independent company created for one project only. Owned by investors at the start. 100% owned by the entrepreneur at maturity.</div></div>
+      <div class="box"><div class="box-title">The project</div><div class="box-desc">The real commercial activity — butcher shop, VTC, school. Managed solely by the entrepreneur. 20-25% of net profits wired to the SPV monthly.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="tech">
+  <div class="si">
+    <div class="sl">Infrastructure</div>
+    <h2 class="st">How money flows without going through Freed</h2>
+    <p class="ss">Freed never holds user funds. A Banque de France-licensed payment provider handles everything — escrow, transfers, compliance.</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-badge">Recommended · Scale phase</div>
+        <div class="tech-title">Swan ★</div>
+        <div class="tech-desc">French Banking-as-a-Service provider licensed by the Banque de France. Opens a real French IBAN per SPV — investors wire directly to the project's dedicated account. Money never mixes between projects.</div>
+        <div class="tech-detail">Sophie wires her 600€ to FR76 002... (Thomas's SPV). Total transparency. This is the architectural ideal for Freed.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-badge">MVP · Fast integration</div>
+        <div class="tech-title">Mangopay</div>
+        <div class="tech-desc">Crowdfunding-specialized electronic money institution. Mature REST API. Handles escrow during collection, automatic refunds if target not reached, and monthly distribution payouts.</div>
+        <div class="tech-detail">3-4 weeks integration. The fastest path to validating the model on early projects.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-badge">Alternative to Mangopay</div>
+        <div class="tech-title">Lemonway</div>
+        <div class="tech-desc">ACPR-licensed electronic money institution. Lower cost than Mangopay, IFP-certified. Well-documented API. Strong track record with French participative finance platforms.</div>
+        <div class="tech-detail">Good option for the growth phase before migrating to Swan's dedicated IBAN architecture.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-badge">Digital signing</div>
+        <div class="tech-title">Yousign</div>
+        <div class="tech-desc">French eIDAS-certified digital signature solution. Every sharing contract is signed by all parties before any funds are released. Each signatory receives a legally binding copy.</div>
+        <div class="tech-detail">No money moves without a signed contract. This is the legal and ethical backbone of every transaction.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-badge">Mandatory regulatory status</div>
+        <div class="tech-title">IFP · ORIAS</div>
+        <div class="tech-desc">Intermédiaire en Financement Participatif. Mandatory ORIAS registration to legally operate a participative finance platform in France. An intermediary status — not a banking license.</div>
+        <div class="tech-detail">This is what legally allows Freed to connect investors and entrepreneurs without holding or managing funds itself.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-badge">Legal foundation</div>
+        <div class="tech-title">Société en participation</div>
+        <div class="tech-desc">French Civil Code Articles 1871–1873. A partnership without formal registration that allows multiple parties to associate around a project and share profits and losses proportionally.</div>
+        <div class="tech-detail">The legal instrument that translates the degressive sharing mechanism into enforceable French law.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section style="background:var(--gp)">
+  <div class="si">
+    <div class="sl">Business model</div>
+    <h2 class="st">Three revenue streams. Zero conflict of interest.</h2>
+    <p class="ss">Freed earns nothing if a collection fails. Our incentives are perfectly aligned with every user on the platform.</p>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="rev-num">5%</div>
+        <div class="rev-title">Collection fee</div>
+        <div class="rev-desc">Charged on success only. If the target isn't reached, Freed receives nothing and every investor is fully refunded.<br/><br/><strong>Ex: 20,000€ raised → 1,000€ for Freed</strong></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-num">1%</div>
+        <div class="rev-title">Monthly distribution fee</div>
+        <div class="rev-desc">On each profit distribution. Passive, cumulative revenue — every active project generates a recurring monthly flow with no additional action.<br/><br/><strong>Ex: 50 projects × 10€/mo = 500€/mo</strong></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-num">49€</div>
+        <div class="rev-title">Entrepreneur subscription</div>
+        <div class="rev-desc">For recurring project owners. Access to advanced analytics, verified badge, priority visibility on the platform.<br/><br/><strong>Ex: 20 entrepreneurs × 49€ = 980€/mo</strong></div>
+      </div>
+    </div>
+    <table class="compare-table" style="margin-top:32px">
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+      <tbody>
+        <tr><td>Projects funded</td><td>10</td><td>40</td><td>100</td></tr>
+        <tr><td>Freed revenue (commissions)</td><td>~9,300€</td><td>~60,000€</td><td>~180,000€</td></tr>
+        <tr><td>GMV (total volume)</td><td>~150,000€</td><td>~600,000€</td><td>~1,500,000€</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="sl" style="color:rgba(255,255,255,.4)">An open experiment</div>
+  <h2>Different financial systems<br/>can coexist — and inspire<br/><em style="color:#7de8a8">each other.</em></h2>
+  <p>Freed is a proof that the most compelling principles of Islamic finance can be adapted into a universal framework — accessible anywhere, by anyone, regardless of background or belief. The experiment is open. The code is open. The conversation is open.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <a href="https://github.com" class="btn btn-white" target="_blank">View source on GitHub</a>
+    <a href="https://linkedin.com/in/baybars-ali-adi-215329404" class="btn btn-ghost" target="_blank">Connect on LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div>
+      <div class="footer-logo">Freed</div>
+      <div class="footer-by">a concept by Baybars Ali Adi</div>
+    </div>
+    <div class="footer-right">
+      <div>L1 Economics · Paris 1 Panthéon-Sorbonne · 2025</div>
+      <div><a href="mailto:Baybars.Adi@etu.univ-paris1.fr" style="color:rgba(255,255,255,.3)">Baybars.Adi@etu.univ-paris1.fr</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const el=document.querySelector(a.getAttribute('href'));
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
